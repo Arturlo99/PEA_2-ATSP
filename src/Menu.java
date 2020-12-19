@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -37,7 +36,6 @@ public class Menu {
 		}
 
 		int dimension = scanner.nextInt();
-		System.out.println(dimension);
 		for (int i = 0; i < 4; i++) {
 			if (scanner.hasNextLine()) {
 				scanner.nextLine();
@@ -55,7 +53,7 @@ public class Menu {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws FileNotFoundException {
-
+		int neighbourhoodType = 0;
 		float[] alpha = {0.999f, 0.9999f, 0.99999f}; // wspolczynnik zmiany temperatury do SW
 		int maxTime = 0; // Kryterium stopu
 		int selection;
@@ -64,10 +62,10 @@ public class Menu {
 			System.out.println("1. Wczytanie danych z pliku");
 			System.out.println("2. Wprowadzenie kryterium stopu");
 			System.out.println("3. Wybór s¹siedztwa");
-			System.out.println("4. Uruchomienie algorytmu TS dla wczytanych danych i ustawieñ");
+			System.out.println("4. Uruchomienie algorytmu TS dla wczytanych danych i ustawieñ z wyœwietleniem wynikow");
 			System.out.println("5. Ustawienie wspólczynnikow zmiany temperatury dla SW");
-			System.out.println("6. Uruchomianie algorytmu SW dla wczytanych danych i ustawieñ");
-			System.out.println("7. Pomiary");
+			System.out.println("6. Uruchomianie algorytmu SW dla wczytanych danych i ustawieñ z wyœwietleniem wynikow");
+			//System.out.println("7. Pomiary");
 			System.out.println("Aby zakonczyc - 0");
 			System.out.println("Wprowadz liczbê: ");
 			Scanner sc = new Scanner(System.in);
@@ -94,11 +92,23 @@ public class Menu {
 			}
 				break;
 
-			/*
-			 * case 3: {
-			 *  } 
-			 *  break;
-			 */
+
+			case 3: {
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Wybierz rodzaj s¹siedztwa: ");
+				System.out.println("0. Swap");
+				System.out.println("1. Insert");
+				System.out.println("2. Invert");
+				neighbourhoodType = scanner.nextInt();
+			} 
+			break;
+			
+			case 4: {
+				graph.tabuSearch(maxTime, neighbourhoodType);
+			}
+			break;
+			
+
 			case 5: {
 				System.out.println("Wprowadz wspolczyniki zmiany temperatury < 1: ");
 				
